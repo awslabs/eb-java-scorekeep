@@ -40,7 +40,7 @@ function Session($scope, $http, $location, $interval, $routeParams, SessionServi
   $scope.loadSession();
   $scope.interval = $interval(function(){
     $scope.loadSession();
-  }, 5000);
+  }, 1500);
   $scope.createGame = function (gamename, gamerules) {
     var sessionid = $routeParams.sessionid;
 
@@ -72,7 +72,8 @@ function Session($scope, $http, $location, $interval, $routeParams, SessionServi
       return GameCollection.setField($scope.session.id, $scope.games[index].id, "starttime", time);
     });
     SetStartTime.then(function(setStartTimeResult) {
-      $location.path('/game/' + $scope.session.id + '/' + $scope.games[index].id + '/' + $scope.user.id);
+      $location.path('/game/' + $scope.session.id + '/' + $scope.games[index].id + '/' + $scope.user.id + '/'
+          + $scope.games[index].rules);
     });
   }
   $scope.endGame = function(index){

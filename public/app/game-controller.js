@@ -31,13 +31,15 @@ function Game($q, $scope, $http, $interval, $routeParams, SessionService, UserSe
     $scope.promise.then(function() {
       $scope.promise = $scope.playgame();
     })
-  }, 5000);
+  }, 1500);
 
   $scope.move = function(cellid){
     if ( $scope.moving == 1 || $scope.winner != '' ) {
       return;
     }
+
     $scope.moving = 1;
+
     $scope.promise.then(function(){
       $scope.promise = $q(function(resolve,reject){
         console.log("MOVE on cell " + cellid);
@@ -78,6 +80,8 @@ function Game($q, $scope, $http, $interval, $routeParams, SessionService, UserSe
 
     });
   }
+
+
   $scope.$on('$destroy',function(){
     if($scope.interval)
         $interval.cancel($scope.interval);
